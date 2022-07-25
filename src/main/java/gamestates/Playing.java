@@ -1,5 +1,6 @@
 package gamestates;
 
+import entities.Player;
 import gamestates.playingstates.*;
 
 import java.awt.*;
@@ -8,9 +9,14 @@ import java.awt.event.MouseEvent;
 
 public class Playing extends GameState implements GameStateInterface {
 
+    private Player player;
+
     private PauseOverlay pauseOverlay;
     private GameOverOverlay gameOverOverlay;
     private LevelCompleteOverlay levelCompletedOverlay;
+
+    private int lvlOffsetX, lvlOffsetY;
+    private int maxLvlOffsetX, maxLvlOffsetY;
 
     public Playing() {
         initClasses();
@@ -18,6 +24,7 @@ public class Playing extends GameState implements GameStateInterface {
     }
 
     private void initClasses() {
+        player = new Player(100, 100, 64,40, this);
 
         pauseOverlay = new PauseOverlay(this);
         gameOverOverlay = new GameOverOverlay(this);
@@ -33,7 +40,7 @@ public class Playing extends GameState implements GameStateInterface {
         switch (EnumPlayState.state) {
             case PLAYING:
 //                levelManager.update();
-//                player.update();
+                player.update();
 //                checkCloseToBorder();
                 break;
             case PAUSED:
@@ -52,7 +59,7 @@ public class Playing extends GameState implements GameStateInterface {
 
     @Override
     public void draw(Graphics g, float scale) {
-        g.drawRect(100, 200, 400, 500);
+        player.draw(g, scale, lvlOffsetX, lvlOffsetY);
 
         switch (EnumPlayState.state) {
             case PLAYING:
@@ -168,13 +175,13 @@ public class Playing extends GameState implements GameStateInterface {
     public void keyPressed(KeyEvent e, float scale) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_A:
-//                player.setLeft(true);
+                player.getPlayerMove().setLeft(true);
                 break;
             case KeyEvent.VK_D:
-//                player.setRight(true);
+                player.getPlayerMove().setRight(true);
                 break;
             case KeyEvent.VK_SPACE:
-//                player.setJump(true);
+                player.getPlayerMove().setJump(true);
                 break;
             case KeyEvent.VK_ESCAPE:
                 if (EnumPlayState.state == EnumPlayState.PAUSED) {
@@ -190,20 +197,20 @@ public class Playing extends GameState implements GameStateInterface {
     public void keyReleased(KeyEvent e, float scale) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_A:
-//                player.setLeft(false);
+                player.getPlayerMove().setLeft(false);
                 break;
             case KeyEvent.VK_D:
-//                player.setRight(false);
+                player.getPlayerMove().setRight(false);
                 break;
             case KeyEvent.VK_SPACE:
-//                player.setJump(false);
+                player.getPlayerMove().setJump(false);
                 break;
         }
     }
 
     public void resetAll() {
         EnumPlayState.state = EnumPlayState.PLAYING;
-//        player.resetAll();
+        player.resetAll();
     }
 
     public void setPaused() {

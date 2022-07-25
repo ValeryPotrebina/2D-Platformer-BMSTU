@@ -25,6 +25,8 @@ public class KeyboardInputs implements KeyListener {
     public void keyPressed(KeyEvent e) {
         switch (EnumGameState.state) {
             case PLAYING:
+                gamePanel.getGame().getPlaying().keyPressed(e, scale);
+                break;
             case MENU:
             case QUIT:
             default:
@@ -36,6 +38,8 @@ public class KeyboardInputs implements KeyListener {
     public void keyReleased(KeyEvent e) {
         switch (EnumGameState.state) {
             case PLAYING:
+                gamePanel.getGame().getPlaying().keyReleased(e, scale);
+                break;
             case MENU:
             case QUIT:
             default:
