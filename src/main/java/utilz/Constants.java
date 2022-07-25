@@ -1,27 +1,23 @@
 package utilz;
 
-import static utilz.Constants.GameWindowConstants.SCALE;
-
 public class Constants {
 
     public static final class GameWindowConstants {
         public final static int FPS_SET = 120;
         public final static int UPS_SET = 200;
 
-        public final static float SCALE = 1.0f;
-
-        public final static int TILE_DEFAULT_SIZE = 64;
-        public final static int TILE_SIZE = (int) (TILE_DEFAULT_SIZE * SCALE);
+        public final static int TILE_SIZE_DEFAULT = 64;
         public final static int TILES_IN_WIDTH = 16;
         public final static int TILES_IN_HEIGHT = 8;
-        public final static int GAME_WIDTH = TILE_SIZE * TILES_IN_WIDTH;
-        public final static int GAME_HEIGHT = TILE_SIZE * TILES_IN_HEIGHT;
+
+        public final static int GAME_WIDTH_DEFAULT = TILE_SIZE_DEFAULT * TILES_IN_WIDTH;
+        public final static int GAME_HEIGHT_DEFAULT = TILE_SIZE_DEFAULT * TILES_IN_HEIGHT;
 
     }
 
     public static class GameConstants {
-        public final static float GRAVITY = 0.035f * SCALE;
-        public static final float ANI_SPEED = 26;
+        public final static float GRAVITY = 0.035f;
+        public static final float ANI_SPEED = 25;
 
     }
 
@@ -41,8 +37,6 @@ public class Constants {
 
             public static final int BUTTON_WIDTH_DEFAULT = 140;
             public static final int BUTTON_HEIGHT_DEFAULT = 56;
-            public static final int BUTTON_WIDTH = (int) (BUTTON_WIDTH_DEFAULT * SCALE);
-            public static final int BUTTON_HEIGHT = (int) (BUTTON_HEIGHT_DEFAULT * SCALE);
         }
 
 //        public static class PauseSoundButtons {

@@ -6,8 +6,7 @@ import inputs.MouseInputs;
 import javax.swing.*;
 import java.awt.*;
 
-import static utilz.Constants.GameWindowConstants.GAME_HEIGHT;
-import static utilz.Constants.GameWindowConstants.GAME_WIDTH;
+import static utilz.Constants.GameWindowConstants.*;
 
 public class GamePanel extends JPanel {
 
@@ -24,6 +23,9 @@ public class GamePanel extends JPanel {
     }
 
     private void setPanelSize() {
+        float scale = game.getScale();
+        int GAME_WIDTH = (int) (GAME_WIDTH_DEFAULT * scale);
+        int GAME_HEIGHT = (int) (GAME_HEIGHT_DEFAULT * scale);
         Dimension size = new Dimension(GAME_WIDTH, GAME_HEIGHT);
         setPreferredSize(size);
     }

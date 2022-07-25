@@ -15,6 +15,8 @@ import static utilz.Constants.UI.MenuButtons.PLAY;
 
 public class Menu extends GameState implements GameStateInterface {
 
+    private float scale;
+
     private final MenuButton[] buttons = new MenuButton[COUNT_BUTTONS];
     private BufferedImage menuImg, backgroundImg;
     private int menuX, menuY, menuWidth, menuHeight;
@@ -33,16 +35,16 @@ public class Menu extends GameState implements GameStateInterface {
 
     private void loadButtons() {
         buttons[0] = new MenuButton(
-                GAME_WIDTH / 2, (int) (150 * SCALE),
+                GAME_WIDTH_DEFAULT / 2, 150,
                 PLAY, EnumGameState.PLAYING);
     }
 
 
     private void calcBorder() {
-        menuWidth = (int) (menuImg.getWidth() * SCALE);
-        menuHeight = (int) (menuImg.getHeight() * SCALE);
-        menuX = GAME_WIDTH / 2 - menuWidth / 2;
-        menuY = (int) (45 * SCALE);
+        menuWidth = menuImg.getWidth();
+        menuHeight = menuImg.getHeight();
+        menuX = GAME_WIDTH_DEFAULT / 2 - menuWidth / 2;
+        menuY = 45;
     }
 
     @Override
@@ -53,24 +55,30 @@ public class Menu extends GameState implements GameStateInterface {
     }
 
     @Override
-    public void draw(Graphics g) {
-        g.drawImage(backgroundImg, 0 , 0, GAME_WIDTH, GAME_HEIGHT, null);
-        g.drawImage(menuImg, menuX, menuY,menuWidth, menuHeight, null);
+    public void draw(Graphics g, float scale) {
+        g.drawImage(backgroundImg, 0 , 0,
+                (int) (GAME_WIDTH_DEFAULT * scale),
+                (int) (GAME_HEIGHT_DEFAULT * scale),
+                null);
+        g.drawImage(menuImg, menuX, menuY,
+                (int) (menuWidth * scale),
+                (int) (menuHeight * scale),
+                null);
 
         for (MenuButton mb : buttons) {
-            mb.draw(g);
+            mb.draw(g, scale);
         }
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {
+    public void mouseClicked(MouseEvent e, float scale) {
 
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {
+    public void mousePressed(MouseEvent e, float scale) {
         for (MenuButton mb : buttons) {
-            if (isIn(e, mb)) {
+            if (isIn(e, mb, scale)) {
                 mb.setMousePressed(true);
                 break;
             }
@@ -78,9 +86,9 @@ public class Menu extends GameState implements GameStateInterface {
     }
 
     @Override
-    public void mouseReleased(MouseEvent e) {
+    public void mouseReleased(MouseEvent e, float scale) {
         for (MenuButton mb : buttons) {
-            if (isIn(e, mb)) {
+            if (isIn(e, mb, scale)) {
                 if (mb.isMousePressed()) {
                     mb.applyGameState();
                     break;
@@ -97,18 +105,18 @@ public class Menu extends GameState implements GameStateInterface {
     }
 
     @Override
-    public void mouseDragged(MouseEvent e) {
+    public void mouseDragged(MouseEvent e, float scale) {
 
     }
 
     @Override
-    public void mouseMoved(MouseEvent e) {
+    public void mouseMoved(MouseEvent e, float scale) {
         for (MenuButton mb : buttons) {
             mb.setMouseOver(false);
         }
 
         for (MenuButton mb : buttons) {
-            if (isIn(e, mb)) {
+            if (isIn(e, mb, scale)) {
                 mb.setMouseOver(true);
                 break;
             }
@@ -116,12 +124,12 @@ public class Menu extends GameState implements GameStateInterface {
     }
 
     @Override
-    public void keyPressed(KeyEvent e) {
+    public void keyPressed(KeyEvent e, float scale) {
 
     }
 
     @Override
-    public void keyReleased(KeyEvent e) {
+    public void keyReleased(KeyEvent e, float scale) {
 
     }
 }

@@ -9,9 +9,11 @@ import java.awt.event.KeyListener;
 public class KeyboardInputs implements KeyListener {
 
     private final GamePanel gamePanel;
+    private float scale;
 
     public KeyboardInputs(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
+        this.scale = gamePanel.getGame().getScale();
     }
 
     @Override

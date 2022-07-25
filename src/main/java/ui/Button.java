@@ -4,7 +4,7 @@ import java.awt.*;
 
 public abstract class Button {
     protected int x, y , width, height;
-    protected Rectangle borders;
+    protected Rectangle border;
 
     protected int typeButton;
     protected int stateButton;
@@ -19,18 +19,18 @@ public abstract class Button {
     }
 
     private void calcBorder() {
-        borders = new Rectangle(x, y, width, height);
+        border = new Rectangle(x, y, width, height);
     }
 
     public Rectangle getBorders() {
-        return borders;
+        return border;
     }
 
     protected abstract void loadImages();
 
     public abstract void update();
 
-    public abstract void draw(Graphics g);
+    public abstract void draw(Graphics g, float scale);
 
     public boolean isMouseOver() {
         return mouseOver;

@@ -8,19 +8,19 @@ public interface GameStateInterface {
 
     public abstract void update();
 
-    public abstract void draw(Graphics g);
+    public abstract void draw(Graphics g, float scale);
 
-    public abstract void mouseClicked(MouseEvent e);
+    public abstract void mouseClicked(MouseEvent e, float scale);
 
-    public abstract void mousePressed(MouseEvent e);
+    public abstract void mousePressed(MouseEvent e, float scale);
 
-    public abstract void mouseReleased(MouseEvent e);
+    public abstract void mouseReleased(MouseEvent e, float scale);
 
-    public abstract void mouseDragged(MouseEvent e);
+    public abstract void mouseDragged(MouseEvent e, float scale);
 
-    public abstract void mouseMoved(MouseEvent e);
+    public abstract void mouseMoved(MouseEvent e, float scale);
 
-    public abstract void keyPressed(KeyEvent e);
+    public abstract void keyPressed(KeyEvent e, float scale);
 
-    public abstract void keyReleased(KeyEvent e);
+    public abstract void keyReleased(KeyEvent e, float scale);
 }

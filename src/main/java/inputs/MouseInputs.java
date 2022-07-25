@@ -10,9 +10,11 @@ import java.awt.event.MouseMotionListener;
 public class MouseInputs implements MouseListener, MouseMotionListener {
 
     private final GamePanel gamePanel;
+    private float scale;
 
     public MouseInputs(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
+        this.scale = gamePanel.getGame().getScale();
     }
 
     @Override
@@ -20,7 +22,7 @@ public class MouseInputs implements MouseListener, MouseMotionListener {
         switch (EnumGameState.state) {
             case PLAYING:
             case MENU:
-                gamePanel.getGame().getMenu().mouseClicked(e);
+                gamePanel.getGame().getMenu().mouseClicked(e, scale);
                 break;
             case QUIT:
             default:
@@ -33,7 +35,7 @@ public class MouseInputs implements MouseListener, MouseMotionListener {
         switch (EnumGameState.state) {
             case PLAYING:
             case MENU:
-                gamePanel.getGame().getMenu().mousePressed(e);
+                gamePanel.getGame().getMenu().mousePressed(e, scale);
                 break;
             case QUIT:
             default:
@@ -46,7 +48,7 @@ public class MouseInputs implements MouseListener, MouseMotionListener {
         switch (EnumGameState.state) {
             case PLAYING:
             case MENU:
-                gamePanel.getGame().getMenu().mouseReleased(e);
+                gamePanel.getGame().getMenu().mouseReleased(e, scale);
                 break;
             case QUIT:
             default:
@@ -69,7 +71,7 @@ public class MouseInputs implements MouseListener, MouseMotionListener {
         switch (EnumGameState.state) {
             case PLAYING:
             case MENU:
-                gamePanel.getGame().getMenu().mouseDragged(e);
+                gamePanel.getGame().getMenu().mouseDragged(e, scale);
                 break;
             case QUIT:
             default:
@@ -82,7 +84,7 @@ public class MouseInputs implements MouseListener, MouseMotionListener {
         switch (EnumGameState.state) {
             case PLAYING:
             case MENU:
-                gamePanel.getGame().getMenu().mouseMoved(e);
+                gamePanel.getGame().getMenu().mouseMoved(e, scale);
                 break;
             case QUIT:
             default:

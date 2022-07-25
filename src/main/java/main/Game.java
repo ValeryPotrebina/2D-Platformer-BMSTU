@@ -12,6 +12,8 @@ import static utilz.Constants.GameWindowConstants.UPS_SET;
 
 public class Game implements Runnable{
 
+    private final float scale = 1.0f;
+
     private GamePanel gamePanel;
     private Debug debug;
 
@@ -67,10 +69,10 @@ public class Game implements Runnable{
 
         switch (EnumGameState.state) {
             case PLAYING:
-                playing.draw(g);
+                playing.draw(g, scale);
                 break;
             case MENU:
-                menu.draw(g);
+                menu.draw(g, scale);
                 break;
             case QUIT:
             default:
@@ -135,6 +137,10 @@ public class Game implements Runnable{
 
     public Playing getPlaying() {
         return playing;
+    }
+
+    public float getScale() {
+        return scale;
     }
 
 
