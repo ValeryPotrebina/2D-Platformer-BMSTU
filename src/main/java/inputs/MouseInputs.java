@@ -20,6 +20,8 @@ public class MouseInputs implements MouseListener, MouseMotionListener {
         switch (EnumGameState.state) {
             case PLAYING:
             case MENU:
+                gamePanel.getGame().getMenu().mouseClicked(e);
+                break;
             case QUIT:
             default:
                 break;
@@ -31,6 +33,8 @@ public class MouseInputs implements MouseListener, MouseMotionListener {
         switch (EnumGameState.state) {
             case PLAYING:
             case MENU:
+                gamePanel.getGame().getMenu().mousePressed(e);
+                break;
             case QUIT:
             default:
                 break;
@@ -42,6 +46,8 @@ public class MouseInputs implements MouseListener, MouseMotionListener {
         switch (EnumGameState.state) {
             case PLAYING:
             case MENU:
+                gamePanel.getGame().getMenu().mouseReleased(e);
+                break;
             case QUIT:
             default:
                 break;
@@ -63,6 +69,8 @@ public class MouseInputs implements MouseListener, MouseMotionListener {
         switch (EnumGameState.state) {
             case PLAYING:
             case MENU:
+                gamePanel.getGame().getMenu().mouseDragged(e);
+                break;
             case QUIT:
             default:
                 break;
@@ -74,6 +82,8 @@ public class MouseInputs implements MouseListener, MouseMotionListener {
         switch (EnumGameState.state) {
             case PLAYING:
             case MENU:
+                gamePanel.getGame().getMenu().mouseMoved(e);
+                break;
             case QUIT:
             default:
                 break;
