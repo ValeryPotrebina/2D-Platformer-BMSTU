@@ -25,8 +25,10 @@ public abstract class Entity {
 
     protected void drawHitBox(Graphics g, float scale, int LvlOffsetX, int LvlOffsetY) {
         g.setColor(Color.PINK);
-        g.drawRect((int) (hitBox.x - LvlOffsetX), (int) (hitBox.y - LvlOffsetY),
-                (int) hitBox.width, (int) hitBox.height);
+        g.drawRect((int) ((hitBox.x - LvlOffsetX) * scale),
+                (int) ((hitBox.y - LvlOffsetY) * scale),
+                (int) (hitBox.width * scale),
+                (int) (hitBox.height * scale));
     }
 
 //    protected void drawAttackBox(Graphics g, float scale, int LvlOffsetX, int LvlOffsetY) {
