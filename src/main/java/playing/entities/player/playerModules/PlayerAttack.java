@@ -1,37 +1,16 @@
-package gamestates.playingstates;
+package playing.entities.player.playerModules;
 
-import gamestates.Playing;
+import playing.PlayingListenerInterface;
+import playing.entities.player.Player;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
 
-public class GameOverOverlay extends PlayState {
+public class PlayerAttack extends PlayerModule implements PlayingListenerInterface {
 
-    private BufferedImage backgroundImg;
-    private int gameOverX, gameOverY, gameOverWidth, gameOverHeight;
-
-    public GameOverOverlay() {
-        loadBackgroundImg();
-        calcBorder();
-        createButtons();
-    }
-
-
-    @Override
-    protected void loadBackgroundImg() {
-
-    }
-
-    @Override
-    protected void calcBorder() {
-
-    }
-
-    @Override
-    protected void createButtons() {
-
+    public PlayerAttack(Player player) {
+        super(player);
     }
 
     @Override
@@ -40,7 +19,7 @@ public class GameOverOverlay extends PlayState {
     }
 
     @Override
-    public void draw(Graphics g, float scale) {
+    public void draw(Graphics g, float scale, int LvlOffsetX, int LvlOffsetY) {
 
     }
 
@@ -78,5 +57,4 @@ public class GameOverOverlay extends PlayState {
     public void keyReleased(KeyEvent e, float scale) {
 
     }
-
 }

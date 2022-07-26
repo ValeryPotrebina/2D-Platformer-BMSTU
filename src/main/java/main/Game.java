@@ -1,10 +1,5 @@
 package main;
 
-import gamestates.EnumGameState;
-import gamestates.Menu;
-import gamestates.Playing;
-import utilz.Debug;
-
 import java.awt.*;
 
 import static utilz.Constants.GameWindowConstants.FPS_SET;
@@ -15,10 +10,7 @@ public class Game implements Runnable{
     private final float scale = 1.0f;
 
     private GamePanel gamePanel;
-    private Debug debug;
-
-    private Menu menu;
-    private Playing playing;
+    private GameDistribution gameDistribution;
 
     private boolean gameExit;
 
@@ -29,9 +21,7 @@ public class Game implements Runnable{
     }
 
     private void initClasses() {
-        debug = new Debug();
-        menu = new Menu();
-        playing = new Playing();
+        gameDistribution = new GameDistribution(this);
     }
 
     private void initPanels() {
@@ -49,35 +39,11 @@ public class Game implements Runnable{
     }
 
     public void update() {
-        switch (EnumGameState.state) {
-            case MENU:
-                menu.update();
-                break;
-            case PLAYING:
-                playing.update();
-                break;
-            case QUIT:
-                gameExit = true;
-            default:
-                System.exit(0);
-                break;
-        }
-
+        gameDistribution.update();
     }
 
     public void draw(Graphics g) {
-
-        switch (EnumGameState.state) {
-            case PLAYING:
-                playing.draw(g, scale);
-                break;
-            case MENU:
-                menu.draw(g, scale);
-                break;
-            case QUIT:
-            default:
-                break;
-        }
+        gameDistribution.draw(g);
     }
 
     @Override
@@ -88,8 +54,9 @@ public class Game implements Runnable{
 
         long previousTime = System.nanoTime();
 
-        int frames = 0;
-        int updates = 0;
+//        int frames = 0;
+//        int updates = 0;
+
         long lastCheck = System.currentTimeMillis();
 
         double deltaU = 0;
@@ -104,44 +71,33 @@ public class Game implements Runnable{
 
             if (deltaU >= 1) {
                 update();
-                updates++;
+//                updates++;
                 deltaU--;
             }
 
             if (deltaF >= 1) {
                 gamePanel.repaint();
-                frames++;
+//                frames++;
                 deltaF--;
             }
 
             if(System.currentTimeMillis() - lastCheck >= 1000) {
-                updateDebug(frames, updates);
-
                 lastCheck = System.currentTimeMillis();
-                frames = 0;
-                updates = 0;
+//                frames = 0;
+//                updates = 0;
             }
         }
     }
 
-    private void updateDebug(int FPS_SET, int UPS_SET) {
-        debug.setFPS(FPS_SET);
-        debug.setUPS(UPS_SET);
-        debug.say();
-    }
-
-
-    public Menu getMenu() {
-        return menu;
-    }
-
-    public Playing getPlaying() {
-        return playing;
+    public void setGameExit() {
+        gameExit = true;
     }
 
     public float getScale() {
         return scale;
     }
 
-
+    public GameDistribution getGameDistribution() {
+        return gameDistribution;
+    }
 }

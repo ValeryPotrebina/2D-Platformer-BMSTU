@@ -1,13 +1,13 @@
-package entities.playerModules;
+package playing.entities.player.playerModules;
 
-import entities.Player;
+import playing.PlayingListenerInterface;
+import playing.entities.player.Player;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 
-import static utilz.Constants.GameConstants.GRAVITY;
-
-public class PlayerMove extends PlayerModule{
+public class PlayerMove extends PlayerModule implements PlayingListenerInterface {
 
     private boolean moving;
     private boolean left, right, jump;
@@ -46,6 +46,41 @@ public class PlayerMove extends PlayerModule{
 
     @Override
     public void draw(Graphics g, float scale, int LvlOffsetX, int LvlOffsetY) {
+
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e, float scale) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e, float scale) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e, float scale) {
+
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e, float scale) {
+
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e, float scale) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e, float scale) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e, float scale) {
 
     }
 

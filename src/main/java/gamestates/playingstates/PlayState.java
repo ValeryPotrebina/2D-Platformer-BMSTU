@@ -1,9 +1,10 @@
 package gamestates.playingstates;
 
+import gamestates.GamePanelInterface;
+import gamestates.GamePanelListenerInterface;
 import gamestates.GameState;
-import gamestates.GameStateInterface;
 
-public abstract class PlayState extends GameState implements GameStateInterface {
+public abstract class PlayState extends GameState implements GamePanelInterface, GamePanelListenerInterface {
 
     abstract void loadBackgroundImg();
 

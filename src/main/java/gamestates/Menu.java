@@ -13,7 +13,7 @@ import static utilz.Constants.TextureConstants.Menu.*;
 import static utilz.Constants.UI.MenuButtons.COUNT_BUTTONS;
 import static utilz.Constants.UI.MenuButtons.PLAY;
 
-public class Menu extends GameState implements GameStateInterface {
+public class Menu extends GameState implements GamePanelInterface, GamePanelListenerInterface {
 
     private float scale;
 
