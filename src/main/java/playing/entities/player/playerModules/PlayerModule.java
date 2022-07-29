@@ -1,16 +1,12 @@
 package playing.entities.player.playerModules;
 
-import playing.PlayingInterface;
-import playing.PlayingListenerInterface;
-import playing.entities.player.Player;
+import playing.entities.player.PlayerModuleManager;
 
-import java.awt.*;
+public abstract class PlayerModule{
 
-public abstract class PlayerModule implements PlayingInterface{
+    protected PlayerModuleManager playerModuleManager;
 
-    protected Player player;
-
-    public PlayerModule(Player player) {
-        this.player = player;
+    public PlayerModule(PlayerModuleManager playerModuleManager) {
+        this.playerModuleManager = playerModuleManager;
     }
 }

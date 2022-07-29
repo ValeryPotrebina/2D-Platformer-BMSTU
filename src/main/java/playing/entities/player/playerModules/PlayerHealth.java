@@ -1,13 +1,15 @@
 package playing.entities.player.playerModules;
 
-import playing.entities.player.Player;
+import playing.PlayingDrawInterface;
+import playing.PlayingUpdateInterface;
+import playing.entities.player.PlayerModuleManager;
 
 import java.awt.*;
 
-public class PlayerHealth extends PlayerModule{
+public class PlayerHealth extends PlayerModule implements PlayingUpdateInterface, PlayingDrawInterface {
 
-    public PlayerHealth(Player player) {
-        super(player);
+    public PlayerHealth(PlayerModuleManager playerModuleManager) {
+        super(playerModuleManager);
     }
 
     @Override

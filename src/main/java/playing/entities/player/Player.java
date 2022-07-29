@@ -1,41 +1,60 @@
 package playing.entities.player;
 
-import playing.entities.Entity;
-import playing.entities.player.playerModules.PlayerAttack;
-import playing.entities.player.playerModules.PlayerMove;
+import playing.PlayingDrawInterface;
+import playing.PlayingKeyListenerInterface;
+import playing.PlayingMouseListenerInterface;
+import playing.PlayingUpdateInterface;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 
-public class Player extends Entity {
+public class Player implements PlayingUpdateInterface, PlayingDrawInterface,
+        PlayingMouseListenerInterface, PlayingKeyListenerInterface {
 
-    private PlayerModulesManager playerModulesManager;
 
-    public Player(float x, float y, int width, int height) {
-        super(x, y, width, height);
-        initHitBox(20, 27);
+    private PlayerModuleManager playerModuleManager;
+
+    public Player() {
         initClasses();
     }
 
     private void initClasses() {
-        playerModulesManager = new PlayerModulesManager(this);
+        playerModuleManager = new PlayerModuleManager(this);
     }
 
     @Override
     public void update() {
-        playerModulesManager.update();
+        playerModuleManager.update();
     }
 
     @Override
     public void draw(Graphics g, float scale, int lvlOffsetX, int lvlOffsetY) {
-        drawHitBox(g, scale, lvlOffsetX, lvlOffsetY);
-        playerModulesManager.draw(g, scale, lvlOffsetX, lvlOffsetY);
+        playerModuleManager.draw(g, scale, lvlOffsetX, lvlOffsetY);
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        playerModuleManager.keyPressed(e);
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        playerModuleManager.keyReleased(e);
     }
 
     public void resetAll() {
-        playerModulesManager.resetAll();
+        playerModuleManager.resetAll();
     }
 
-    public PlayerModulesManager getPlayerModulesManager() {
-        return playerModulesManager;
+    public PlayerModuleManager getPlayerModulesManager() {
+        return playerModuleManager;
     }
+
+
 }

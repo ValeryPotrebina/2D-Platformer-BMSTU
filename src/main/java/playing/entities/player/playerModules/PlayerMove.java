@@ -1,13 +1,14 @@
 package playing.entities.player.playerModules;
 
-import playing.PlayingListenerInterface;
-import playing.entities.player.Player;
+import playing.PlayingDrawInterface;
+import playing.PlayingKeyListenerInterface;
+import playing.PlayingUpdateInterface;
+import playing.entities.player.PlayerModuleManager;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
 
-public class PlayerMove extends PlayerModule implements PlayingListenerInterface {
+public class PlayerMove extends PlayerModule implements PlayingKeyListenerInterface, PlayingUpdateInterface, PlayingDrawInterface {
 
     private boolean moving;
     private boolean left, right, jump;
@@ -17,8 +18,8 @@ public class PlayerMove extends PlayerModule implements PlayingListenerInterface
     protected float speedInAir;
     protected float speedInWater;
 
-    public PlayerMove(Player player) {
-        super(player);
+    public PlayerMove(PlayerModuleManager playerModuleManager) {
+        super(playerModuleManager);
     }
 
     @Override
@@ -41,7 +42,7 @@ public class PlayerMove extends PlayerModule implements PlayingListenerInterface
     }
 
     private void updateXPos(float xSpeed) {
-        player.getHitBox().x += xSpeed;
+        playerModuleManager.getPlayerHitBox().getHitBox().x += xSpeed;
     }
 
     @Override
@@ -49,39 +50,35 @@ public class PlayerMove extends PlayerModule implements PlayingListenerInterface
 
     }
 
-    @Override
-    public void mouseClicked(MouseEvent e, float scale) {
 
+    @Override
+    public void keyPressed(KeyEvent e) {
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_A:
+                setLeft(true);
+                break;
+            case KeyEvent.VK_D:
+                setRight(true);
+                break;
+            case KeyEvent.VK_SPACE:
+                setJump(true);
+                break;
+        }
     }
 
     @Override
-    public void mousePressed(MouseEvent e, float scale) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e, float scale) {
-
-    }
-
-    @Override
-    public void mouseDragged(MouseEvent e, float scale) {
-
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e, float scale) {
-
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e, float scale) {
-
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e, float scale) {
-
+    public void keyReleased(KeyEvent e) {
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_A:
+                setLeft(false);
+                break;
+            case KeyEvent.VK_D:
+                setRight(false);
+                break;
+            case KeyEvent.VK_SPACE:
+                setJump(true);
+                break;
+        }
     }
 
     public void setLeft(boolean left) {
@@ -94,6 +91,18 @@ public class PlayerMove extends PlayerModule implements PlayingListenerInterface
 
     public void setJump(boolean jump) {
         this.jump = jump;
+    }
+
+    public boolean isLeft() {
+        return left;
+    }
+
+    public boolean isRight() {
+        return right;
+    }
+
+    public boolean isJump() {
+        return jump;
     }
 
 }

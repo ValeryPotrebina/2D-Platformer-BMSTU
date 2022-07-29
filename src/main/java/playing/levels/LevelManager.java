@@ -1,14 +1,15 @@
 package playing.levels;
 
-import gamestates.Playing;
-import playing.PlayingInterface;
+
+import playing.PlayingDrawInterface;
+import playing.PlayingUpdateInterface;
 import utilz.LoadSave;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public class LevelManager implements PlayingInterface {
+public class LevelManager implements PlayingUpdateInterface, PlayingDrawInterface {
 
     private ArrayList<Level> levels;
     private int lvlIndex = 0;

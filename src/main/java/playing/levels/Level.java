@@ -1,6 +1,7 @@
 package playing.levels;
 
-import playing.PlayingInterface;
+import playing.PlayingDrawInterface;
+import playing.PlayingUpdateInterface;
 import utilz.LoadSave;
 
 import java.awt.*;
@@ -10,7 +11,7 @@ import static utilz.Constants.GameWindowConstants.*;
 import static utilz.Constants.TextureConstants.Level.LEVEL_LOCATION_TEXTURES;
 import static utilz.Constants.TextureConstants.Level.LVL_TEXTURES_PNG;
 
-public class Level implements PlayingInterface {
+public class Level implements PlayingUpdateInterface, PlayingDrawInterface {
 
     private final BufferedImage levelImg;
     private BufferedImage[] levelSprite;
