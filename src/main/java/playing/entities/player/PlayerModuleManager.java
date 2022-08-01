@@ -34,8 +34,10 @@ public class PlayerModuleManager implements PlayingUpdateInterface, PlayingDrawI
         playerOutPut = new PlayerOutPut(this);
         playerListener = new PlayerListener(this);
 
-        playerHitBox = new PlayerHitBox(this,0,0,20,27);
-        playerAttack = new PlayerAttack(this, 20, 0, 20 ,20);
+        playerHitBox = new PlayerHitBox(this,100,250,20,27);
+        playerAttack = new PlayerAttack(this,
+                (int) (playerHitBox.getHitBox().x + playerHitBox.getHitBox().width) + 3,
+                (int) playerHitBox.getHitBox().y, 20 ,20);
         playerMove = new PlayerMove(this);
     }
 
