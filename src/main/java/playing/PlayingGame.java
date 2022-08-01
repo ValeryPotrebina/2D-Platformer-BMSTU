@@ -1,6 +1,7 @@
 package playing;
 
 import gamestates.GamePanelInterface;
+import playing.entities.PlayerLevelManager;
 import playing.entities.player.PlayerManager;
 import playing.levels.LevelManager;
 
@@ -13,6 +14,7 @@ public class PlayingGame implements GamePanelInterface,
 
     private LevelManager levelManager;
     private PlayerManager playerManager;
+    private PlayerLevelManager playerLevelManager;
 
     private int lvlOffsetX, lvlOffsetY;
     private int maxLvlOffsetX, maxLvlOffsetY;
@@ -22,8 +24,9 @@ public class PlayingGame implements GamePanelInterface,
     }
 
     private void initClasses() {
-        levelManager = new LevelManager();
-        playerManager = new PlayerManager();
+        playerLevelManager = new PlayerLevelManager(this);
+        levelManager = new LevelManager(playerLevelManager);
+        playerManager = new PlayerManager(playerLevelManager);
     }
 
     @Override
@@ -52,7 +55,16 @@ public class PlayingGame implements GamePanelInterface,
     public void keyReleased(KeyEvent e) {
         playerManager.keyReleased(e);
     }
+
     public void resetAll() {
         playerManager.resetAll();
+    }
+
+    public LevelManager getLevelManager() {
+        return levelManager;
+    }
+
+    public PlayerManager getPlayerManager() {
+        return playerManager;
     }
 }

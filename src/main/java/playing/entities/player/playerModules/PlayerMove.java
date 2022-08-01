@@ -7,16 +7,20 @@ import playing.entities.player.PlayerModuleManager;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.geom.Rectangle2D;
+
+import static utilz.Constants.GameConstants.GRAVITY;
 
 public class PlayerMove extends PlayerModule implements PlayingKeyListenerInterface, PlayingUpdateInterface, PlayingDrawInterface {
 
     private boolean moving;
     private boolean left, right, jump;
-    protected boolean inAir, inWater;
+    private boolean inAir, inWater;
+    private boolean onFloor;
 
-    protected float speedInWalk = 1.f;
-    protected float speedInAir;
-    protected float speedInWater;
+    private float speedInWalk = 1.f;
+    private float speedInAir;
+    private float speedInWater;
 
     public PlayerMove(PlayerModuleManager playerModuleManager) {
         super(playerModuleManager);
@@ -30,11 +34,30 @@ public class PlayerMove extends PlayerModule implements PlayingKeyListenerInterf
     private void updatePos() {
         float xSpeed = 0;
 
-        if(left) {
+        if (left) {
             xSpeed -= speedInWalk;
         }
         if (right) {
             xSpeed += speedInWalk;
+        }
+
+        if (onFloor) {
+            if (!playerModuleManager.IsPlayerOnFloor())
+                onFloor = false;
+        }
+
+        if (!onFloor) {
+            Rectangle2D.Double oldHitBox = playerModuleManager.getPlayerHitBox().getHitBox();
+            Rectangle2D.Double newHitBox = new Rectangle2D.Double(
+                    oldHitBox.x, oldHitBox.y + speedInAir,
+                    oldHitBox.width, oldHitBox.height);
+            if (playerModuleManager.CanMoveHere(newHitBox)) {
+                updateYPos(speedInAir);
+                speedInAir += GRAVITY;
+            } else {
+                onFloor = true;
+                speedInAir = 0;
+            }
         }
 
         updateXPos(xSpeed);
@@ -43,6 +66,10 @@ public class PlayerMove extends PlayerModule implements PlayingKeyListenerInterf
 
     private void updateXPos(float xSpeed) {
         playerModuleManager.getPlayerHitBox().getHitBox().x += xSpeed;
+    }
+
+    private void updateYPos(float ySpeed) {
+        playerModuleManager.getPlayerHitBox().getHitBox().y += ySpeed;
     }
 
     @Override

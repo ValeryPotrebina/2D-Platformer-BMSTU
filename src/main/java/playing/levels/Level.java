@@ -73,4 +73,8 @@ public class Level implements PlayingUpdateInterface, PlayingDrawInterface {
             }
         }
     }
+
+    public int[][] getLvlData() {
+        return lvlData;
+    }
 }

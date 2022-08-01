@@ -1,11 +1,10 @@
 package playing.entities.player;
 
-import gamestates.Playing;
 import playing.PlayingDrawInterface;
 import playing.PlayingKeyListenerInterface;
 import playing.PlayingMouseListenerInterface;
 import playing.PlayingUpdateInterface;
-import playing.entities.player.Player;
+import playing.entities.PlayerLevelManager;
 import playing.entities.player.manager.PMInPut;
 import playing.entities.player.manager.PMListener;
 import playing.entities.player.manager.PMOutPut;
@@ -13,10 +12,12 @@ import playing.entities.player.manager.PMOutPut;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.geom.Rectangle2D;
 
 public class PlayerManager implements PlayingUpdateInterface, PlayingDrawInterface,
         PlayingMouseListenerInterface, PlayingKeyListenerInterface {
 
+    private PlayerLevelManager playerLevelManager;
 
     private Player player;
 
@@ -24,11 +25,13 @@ public class PlayerManager implements PlayingUpdateInterface, PlayingDrawInterfa
     private PMOutPut pmOutPut;
     private PMListener pmListener;
 
-    public PlayerManager() {
+    public PlayerManager(PlayerLevelManager playerLevelManager) {
+        this.playerLevelManager = playerLevelManager;
         initClasses();
     }
+
     private void initClasses() {
-        player = new Player();
+        player = new Player(this);
         pmInPut = new PMInPut(this);
         pmOutPut = new PMOutPut(this);
         pmListener = new PMListener(this);
@@ -65,5 +68,13 @@ public class PlayerManager implements PlayingUpdateInterface, PlayingDrawInterfa
     @Override
     public void keyReleased(KeyEvent e) {
         pmListener.keyReleased(e);
+    }
+
+    public boolean IsPlayerOnFloor(Rectangle2D.Double hitBox) {
+        return playerLevelManager.IsPlayerOnFloor(hitBox);
+    }
+
+    public boolean CanMoveHere(Rectangle2D.Double hitBox) {
+        return playerLevelManager.CanMoveHere(hitBox);
     }
 }

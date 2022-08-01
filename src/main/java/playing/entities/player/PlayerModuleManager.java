@@ -9,6 +9,7 @@ import playing.entities.player.playerModules.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.geom.Rectangle2D;
 
 public class PlayerModuleManager implements PlayingUpdateInterface, PlayingDrawInterface,
         PlayingMouseListenerInterface, PlayingKeyListenerInterface {
@@ -95,6 +96,14 @@ public class PlayerModuleManager implements PlayingUpdateInterface, PlayingDrawI
 
     public void resetAll() {
 
+    }
+
+    public boolean IsPlayerOnFloor() {
+        return player.IsPlayerOnFloor(playerHitBox.getHitBox());
+    }
+
+    public boolean CanMoveHere(Rectangle2D.Double hitBox) {
+        return player.CanMoveHere(hitBox);
     }
 
 }
