@@ -31,7 +31,7 @@ public class PlayerManager implements PlayingUpdateInterface, PlayingDrawInterfa
     }
 
     private void initClasses() {
-        player = new Player(this);
+        player = new Player(this, 100, 250);
         pmInPut = new PMInPut(this);
         pmOutPut = new PMOutPut(this);
         pmListener = new PMListener(this);
@@ -76,5 +76,13 @@ public class PlayerManager implements PlayingUpdateInterface, PlayingDrawInterfa
 
     public boolean CanMoveHere(Rectangle2D.Double hitBox) {
         return playerLevelManager.CanMoveHere(hitBox);
+    }
+
+    public int getPlayerX() {
+        return (int) player.getX();
+    }
+
+    public int getPlayerY() {
+        return (int) player.getY();
     }
 }

@@ -64,12 +64,12 @@ public class PlayerMove extends PlayerModule implements PlayingKeyListenerInterf
         moving = true;
     }
 
-    private void updateXPos(float xSpeed) {
-        playerModuleManager.getPlayerHitBox().getHitBox().x += xSpeed;
+    private void updateXPos(double xSpeed) {
+        playerModuleManager.getPlayerHitBox().updateHitBoxX((int) xSpeed);
     }
 
-    private void updateYPos(float ySpeed) {
-        playerModuleManager.getPlayerHitBox().getHitBox().y += ySpeed;
+    private void updateYPos(double ySpeed) {
+        playerModuleManager.getPlayerHitBox().updateHitBoxY((int) ySpeed);
     }
 
     @Override

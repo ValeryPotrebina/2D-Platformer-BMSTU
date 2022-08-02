@@ -37,10 +37,17 @@ public class LevelManager implements PlayingUpdateInterface, PlayingDrawInterfac
 
     @Override
     public void draw(Graphics g, float scale, int lvlOffsetX, int lvlOffsetY) {
-        levels.get(lvlIndex).draw(g, scale, lvlOffsetY, lvlOffsetY);
+        levels.get(lvlIndex).draw(g, scale, lvlOffsetX, lvlOffsetY);
     }
 
     public int[][] getLvlData() {
         return levels.get(lvlIndex).getLvlData();
+    }
+
+    public int getLvlOffsetX() {
+        return levels.get(lvlIndex).getMaxLvlOffsetX();
+    }
+    public int getLvlOffsetY() {
+        return levels.get(lvlIndex).getMaxLvlOffsetY();
     }
 }

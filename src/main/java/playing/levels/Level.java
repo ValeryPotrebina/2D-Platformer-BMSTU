@@ -17,10 +17,12 @@ public class Level implements PlayingUpdateInterface, PlayingDrawInterface {
     private BufferedImage[] levelSprite;
     private int[][] lvlData;
 
+    private int maxLvlOffsetX, maxLvlOffsetY;
+
     public Level(BufferedImage levelImg) {
         this.levelImg = levelImg;
         GetLevelData(levelImg);
-//        calcLvlOffset();
+        calcLvlOffset();
         importOutsideSprites();
     }
 
@@ -37,6 +39,16 @@ public class Level implements PlayingUpdateInterface, PlayingDrawInterface {
             }
 
         this.lvlData = lvlData;
+    }
+
+    private void calcLvlOffset() {
+        int lvlTilesWideX = levelImg.getWidth();
+        int maxTilesOffsetX = lvlTilesWideX - TILES_IN_WIDTH;
+        maxLvlOffsetX = TILE_SIZE_DEFAULT * maxTilesOffsetX;
+
+        int lvlTilesWideY = levelImg.getHeight();
+        int maxTilesOffsetY = lvlTilesWideY - TILES_IN_HEIGHT;
+        maxLvlOffsetY = TILE_SIZE_DEFAULT * maxTilesOffsetY;
     }
 
     private void importOutsideSprites() {
@@ -62,19 +74,26 @@ public class Level implements PlayingUpdateInterface, PlayingDrawInterface {
     }
 
     private void drawLvlSprite(Graphics g, float scale, int lvlOffsetX, int lvlOffsetY) {
-        int TILE_SIZE = (int) (TILE_SIZE_DEFAULT * scale);
-        for (int j = 0; j < TILES_IN_HEIGHT && j < lvlData.length; j++) {
-            for (int i = 0; i < TILES_IN_WIDTH && i < lvlData[0].length; i++) {
+        for (int j = 0; j < lvlData.length; j++) {
+            for (int i = 0; i < lvlData[0].length; i++) {
                 int index = lvlData[j][i];
                 g.drawImage(levelSprite[index],
-                        TILE_SIZE * i - lvlOffsetX,
-                        TILE_SIZE * j - lvlOffsetY,
-                        TILE_SIZE, TILE_SIZE, null);
+                        (int) ((TILE_SIZE_DEFAULT * i - lvlOffsetX) * scale),
+                        (int) ((TILE_SIZE_DEFAULT * j - lvlOffsetY) * scale),
+                        (int) (TILE_SIZE_DEFAULT * scale), (int) (TILE_SIZE_DEFAULT * scale), null);
             }
         }
     }
 
     public int[][] getLvlData() {
         return lvlData;
+    }
+
+    public int getMaxLvlOffsetX() {
+        return maxLvlOffsetX;
+    }
+
+    public int getMaxLvlOffsetY() {
+        return maxLvlOffsetY;
     }
 }

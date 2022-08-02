@@ -4,20 +4,22 @@ import playing.PlayingDrawInterface;
 import playing.PlayingKeyListenerInterface;
 import playing.PlayingMouseListenerInterface;
 import playing.PlayingUpdateInterface;
+import playing.entities.Entity;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 
-public class Player implements PlayingUpdateInterface, PlayingDrawInterface,
+public class Player extends Entity implements PlayingUpdateInterface, PlayingDrawInterface,
         PlayingMouseListenerInterface, PlayingKeyListenerInterface {
 
     private PlayerManager playerManager;
 
     private PlayerModuleManager playerModuleManager;
 
-    public Player(PlayerManager playerManager) {
+    public Player(PlayerManager playerManager, int x, int y) {
+        super(x, y);
         this.playerManager = playerManager;
         initClasses();
     }
@@ -65,4 +67,5 @@ public class Player implements PlayingUpdateInterface, PlayingDrawInterface,
     public boolean CanMoveHere(Rectangle2D.Double hitBox) {
         return playerManager.CanMoveHere(hitBox);
     }
+
 }

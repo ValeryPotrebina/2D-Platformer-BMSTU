@@ -18,12 +18,12 @@ public class PlayerLevelManager {
 
     public boolean IsPlayerOnFloor(Rectangle2D.Double hitBox) {
         int[][] lvlData = playingGame.getLevelManager().getLvlData();
-        if (IsSolid(hitBox.x, hitBox.y + hitBox.height + 1, lvlData)) {
-//            if (!IsSolid(hitBox.x + hitBox.width, hitBox.y + hitBox.height + 1, lvlData))
-            return true;
-        } else {
-            return true;
+        if (!IsSolid(hitBox.x, hitBox.y + hitBox.height + 1, lvlData)) {
+            if (!IsSolid(hitBox.x + hitBox.width, hitBox.y + hitBox.height + 1, lvlData)) {
+                return false;
+            }
         }
+        return true;
     }
 
     public boolean CanMoveHere(Rectangle2D.Double hitBox) {
@@ -62,4 +62,5 @@ public class PlayerLevelManager {
             return true;
         return false;
     }
+
 }

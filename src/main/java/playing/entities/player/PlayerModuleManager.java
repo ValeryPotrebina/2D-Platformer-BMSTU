@@ -35,11 +35,27 @@ public class PlayerModuleManager implements PlayingUpdateInterface, PlayingDrawI
         playerOutPut = new PlayerOutPut(this);
         playerListener = new PlayerListener(this);
 
-        playerHitBox = new PlayerHitBox(this,100,250,20,27);
+        playerHitBox = new PlayerHitBox(this, getPlayerX(), getPlayerY(), 20, 27);
         playerAttack = new PlayerAttack(this,
                 (int) (playerHitBox.getHitBox().x + playerHitBox.getHitBox().width) + 3,
                 (int) playerHitBox.getHitBox().y, 20 ,20);
         playerMove = new PlayerMove(this);
+    }
+
+    public void setPlayerX(double x) {
+        player.setX(x);
+    }
+
+    public void setPlayerY(double y) {
+        player.setY(y);
+    }
+
+    public int getPlayerX() {
+        return (int) player.getX();
+    }
+
+    public int getPlayerY() {
+        return (int) player.getY();
     }
 
     @Override
@@ -105,5 +121,4 @@ public class PlayerModuleManager implements PlayingUpdateInterface, PlayingDrawI
     public boolean CanMoveHere(Rectangle2D.Double hitBox) {
         return player.CanMoveHere(hitBox);
     }
-
 }
