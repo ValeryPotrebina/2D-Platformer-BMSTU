@@ -9,8 +9,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
-import static utilz.Constants.GameWindowConstants.GAME_HEIGHT_DEFAULT;
-import static utilz.Constants.GameWindowConstants.GAME_WIDTH_DEFAULT;
+import static utilz.Constants.GameWindowConstants.*;
 
 public class PlayingGame implements GamePanelInterface,
         PlayingMouseListenerInterface, PlayingKeyListenerInterface{
@@ -21,10 +20,7 @@ public class PlayingGame implements GamePanelInterface,
 
     private int lvlOffsetX, lvlOffsetY;
     private int maxLvlOffsetX, maxLvlOffsetY;
-    private final int leftBorder = (int) (0.2 * GAME_WIDTH_DEFAULT);
-    private final int rightBorder = (int) (0.8 * GAME_WIDTH_DEFAULT);
-    private final int topBorder = (int) (0.2 * GAME_HEIGHT_DEFAULT);
-    private final int downBorder = (int) (0.8 * GAME_HEIGHT_DEFAULT);
+
 
     public PlayingGame() {
         initClasses();
@@ -53,10 +49,10 @@ public class PlayingGame implements GamePanelInterface,
         int playerX = playerManager.getPlayerX();
         int diffX = playerX - lvlOffsetX;
 
-        if (diffX > rightBorder) {
-            lvlOffsetX += diffX - rightBorder;
-        } else if (diffX < leftBorder) {
-            lvlOffsetX += diffX - leftBorder;
+        if (diffX > RIGHT_BORDER) {
+            lvlOffsetX += diffX - RIGHT_BORDER;
+        } else if (diffX < LEFT_BORDER) {
+            lvlOffsetX += diffX - LEFT_BORDER;
         }
 
         if (lvlOffsetX > maxLvlOffsetX) {
@@ -69,10 +65,10 @@ public class PlayingGame implements GamePanelInterface,
         int playerY = playerManager.getPlayerY();
         int diffY = playerY - lvlOffsetY;
 
-        if (diffY > downBorder) {
-            lvlOffsetY += diffY - downBorder;
-        } else if (diffY < topBorder) {
-            lvlOffsetY += diffY - topBorder;
+        if (diffY > DOWN_BORDER) {
+            lvlOffsetY += diffY - DOWN_BORDER;
+        } else if (diffY < TOP_BORDER) {
+            lvlOffsetY += diffY - TOP_BORDER;
         }
 
         if (lvlOffsetY > maxLvlOffsetY) {

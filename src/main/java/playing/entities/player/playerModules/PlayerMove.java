@@ -18,9 +18,12 @@ public class PlayerMove extends PlayerModule implements PlayingKeyListenerInterf
     private boolean inAir, inWater;
     private boolean onFloor;
 
-    private float speedInWalk = 1.f;
+    private final float speedWalk = 1.f;
+    private final float speedJump = -2.25f;
     private float speedInAir;
     private float speedInWater;
+    private float ySpeed = 0;
+    float xSpeed = 0;
 
     public PlayerMove(PlayerModuleManager playerModuleManager) {
         super(playerModuleManager);
@@ -32,13 +35,21 @@ public class PlayerMove extends PlayerModule implements PlayingKeyListenerInterf
     }
 
     private void updatePos() {
-        float xSpeed = 0;
+
+
+
+        if (jump) {
+            if(onFloor) {
+                onFloor = false;
+                ySpeed = speedJump;
+            }
+        }
 
         if (left) {
-            xSpeed -= speedInWalk;
+            xSpeed -= speedWalk;
         }
         if (right) {
-            xSpeed += speedInWalk;
+            xSpeed += speedWalk;
         }
 
         if (onFloor) {
@@ -49,27 +60,37 @@ public class PlayerMove extends PlayerModule implements PlayingKeyListenerInterf
         if (!onFloor) {
             Rectangle2D.Double oldHitBox = playerModuleManager.getPlayerHitBox().getHitBox();
             Rectangle2D.Double newHitBox = new Rectangle2D.Double(
-                    oldHitBox.x, oldHitBox.y + speedInAir,
+                    oldHitBox.x, oldHitBox.y + ySpeed,
                     oldHitBox.width, oldHitBox.height);
+
             if (playerModuleManager.CanMoveHere(newHitBox)) {
-                updateYPos(speedInAir);
-                speedInAir += GRAVITY;
+                updateYPos(ySpeed);
+                ySpeed += GRAVITY;
             } else {
-                onFloor = true;
-                speedInAir = 0;
+                if (ySpeed > 0) {
+                    onFloor = true;
+                }
+                ySpeed = 0;
             }
         }
 
-        updateXPos(xSpeed);
+        Rectangle2D.Double oldHitBox = playerModuleManager.getPlayerHitBox().getHitBox();
+        Rectangle2D.Double newHitBox = new Rectangle2D.Double(
+                oldHitBox.x + xSpeed, oldHitBox.y,
+                oldHitBox.width, oldHitBox.height);
+        if (playerModuleManager.CanMoveHere(newHitBox)) {
+            updateXPos(xSpeed);
+        }
+        xSpeed = 0;
         moving = true;
     }
 
     private void updateXPos(double xSpeed) {
-        playerModuleManager.getPlayerHitBox().updateHitBoxX((int) xSpeed);
+        playerModuleManager.getPlayerHitBox().updateHitBoxX(xSpeed);
     }
 
     private void updateYPos(double ySpeed) {
-        playerModuleManager.getPlayerHitBox().updateHitBoxY((int) ySpeed);
+        playerModuleManager.getPlayerHitBox().updateHitBoxY(ySpeed);
     }
 
     @Override
@@ -103,7 +124,7 @@ public class PlayerMove extends PlayerModule implements PlayingKeyListenerInterf
                 setRight(false);
                 break;
             case KeyEvent.VK_SPACE:
-                setJump(true);
+                setJump(false);
                 break;
         }
     }
