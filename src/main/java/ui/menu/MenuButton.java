@@ -46,10 +46,12 @@ public class MenuButton extends Button {
     }
 
     public void draw(Graphics g, float scale) {
-        int BUTTON_WIDTH = (int) (BUTTON_WIDTH_DEFAULT * scale);
-        int BUTTON_HEIGHT = (int) (BUTTON_HEIGHT_DEFAULT * scale);
-        g.drawImage(images[stateButton], x, y,
-                BUTTON_WIDTH, BUTTON_HEIGHT, null);
+        int buttonWidth = (int) (BUTTON_WIDTH_DEFAULT * scale);
+        int buttonHeight = (int) (BUTTON_HEIGHT_DEFAULT * scale);
+        int buttonX = (int) (x * scale);
+        int buttonY = (int) (y * scale);
+        g.drawImage(images[stateButton], buttonX, buttonY,
+                buttonWidth, buttonHeight, null);
     }
 
     public void applyGameState() {

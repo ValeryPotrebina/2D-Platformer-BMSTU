@@ -9,41 +9,23 @@ import java.awt.event.KeyListener;
 public class KeyboardInputs implements KeyListener {
 
     private final GamePanel gamePanel;
-    private float scale;
 
     public KeyboardInputs(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
-        this.scale = gamePanel.getGame().getScale();
     }
 
     @Override
     public void keyTyped(KeyEvent e) {
-
+        gamePanel.getGame().getGameDistribution().keyTyped(e);
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        switch (EnumGameState.state) {
-            case PLAYING:
-                gamePanel.getGame().getPlaying().keyPressed(e, scale);
-                break;
-            case MENU:
-            case QUIT:
-            default:
-                break;
-        }
+        gamePanel.getGame().getGameDistribution().keyPressed(e);
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        switch (EnumGameState.state) {
-            case PLAYING:
-                gamePanel.getGame().getPlaying().keyReleased(e, scale);
-                break;
-            case MENU:
-            case QUIT:
-            default:
-                break;
-        }
+        gamePanel.getGame().getGameDistribution().keyReleased(e);
     }
 }

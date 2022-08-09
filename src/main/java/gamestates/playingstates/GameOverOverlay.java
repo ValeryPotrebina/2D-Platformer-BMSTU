@@ -9,13 +9,10 @@ import java.awt.image.BufferedImage;
 
 public class GameOverOverlay extends PlayState {
 
-    private Playing playing;
-
     private BufferedImage backgroundImg;
     private int gameOverX, gameOverY, gameOverWidth, gameOverHeight;
 
-    public GameOverOverlay(Playing playing) {
-        this.playing = playing;
+    public GameOverOverlay() {
         loadBackgroundImg();
         calcBorder();
         createButtons();

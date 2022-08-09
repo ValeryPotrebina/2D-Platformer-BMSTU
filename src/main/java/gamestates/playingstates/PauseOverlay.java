@@ -9,14 +9,10 @@ import java.awt.image.BufferedImage;
 
 public class PauseOverlay extends PlayState {
 
-
-    private final Playing playing;
-
     private BufferedImage backgroundImg;
     private int pauseX, pauseY, pauseWidth, pauseHeight;
 
-    public PauseOverlay(Playing playing) {
-        this.playing = playing;
+    public PauseOverlay() {
         loadBackgroundImg();
         calcBorder();
         createButtons();

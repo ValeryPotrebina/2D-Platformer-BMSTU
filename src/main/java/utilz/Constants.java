@@ -6,9 +6,9 @@ public class Constants {
         public final static int FPS_SET = 120;
         public final static int UPS_SET = 200;
 
-        public final static int TILE_SIZE_DEFAULT = 64;
-        public final static int TILES_IN_WIDTH = 16;
-        public final static int TILES_IN_HEIGHT = 8;
+        public final static int TILE_SIZE_DEFAULT = 32;
+        public final static int TILES_IN_WIDTH = 32;
+        public final static int TILES_IN_HEIGHT = 16;
 
         public final static int GAME_WIDTH_DEFAULT = TILE_SIZE_DEFAULT * TILES_IN_WIDTH;
         public final static int GAME_HEIGHT_DEFAULT = TILE_SIZE_DEFAULT * TILES_IN_HEIGHT;
@@ -159,7 +159,8 @@ public class Constants {
         }
 
         public static final class Level {
-//            public static final String LVL_TEXTURES_PNG = "lvl_textures.png";
+            public static final String LEVEL_LOCATION_TEXTURES = "level";
+            public static final String LVL_TEXTURES_PNG = "lvl_textures.png";
 //            public static final String LVL_BACKGROUND_PNG = "lvl_background.png";
 //            public static final String LVL_CLOUDS_BIG_PNG = "lvl_clouds_big.png";
 //            public static final String LVL_CLOUDS_SMALL_PNG = "lvl_clouds_small.png";

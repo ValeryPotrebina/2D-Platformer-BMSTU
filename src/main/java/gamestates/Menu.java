@@ -13,7 +13,7 @@ import static utilz.Constants.TextureConstants.Menu.*;
 import static utilz.Constants.UI.MenuButtons.COUNT_BUTTONS;
 import static utilz.Constants.UI.MenuButtons.PLAY;
 
-public class Menu extends GameState implements GameStateInterface {
+public class Menu extends GameState implements GamePanelInterface, GamePanelListenerInterface {
 
     private float scale;
 
@@ -35,7 +35,8 @@ public class Menu extends GameState implements GameStateInterface {
 
     private void loadButtons() {
         buttons[0] = new MenuButton(
-                GAME_WIDTH_DEFAULT / 2, 150,
+                GAME_WIDTH_DEFAULT / 2,
+                GAME_HEIGHT_DEFAULT / 2,
                 PLAY, EnumGameState.PLAYING);
     }
 
@@ -44,7 +45,7 @@ public class Menu extends GameState implements GameStateInterface {
         menuWidth = menuImg.getWidth();
         menuHeight = menuImg.getHeight();
         menuX = GAME_WIDTH_DEFAULT / 2 - menuWidth / 2;
-        menuY = 45;
+        menuY = GAME_HEIGHT_DEFAULT / 2 - menuHeight / 2;
     }
 
     @Override
@@ -60,7 +61,9 @@ public class Menu extends GameState implements GameStateInterface {
                 (int) (GAME_WIDTH_DEFAULT * scale),
                 (int) (GAME_HEIGHT_DEFAULT * scale),
                 null);
-        g.drawImage(menuImg, menuX, menuY,
+        g.drawImage(menuImg,
+                (int) (menuX * scale),
+                (int) (menuY * scale),
                 (int) (menuWidth * scale),
                 (int) (menuHeight * scale),
                 null);
