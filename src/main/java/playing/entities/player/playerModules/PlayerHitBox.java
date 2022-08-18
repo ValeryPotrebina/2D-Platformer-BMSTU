@@ -45,4 +45,14 @@ public class PlayerHitBox extends PlayerModule implements PlayingUpdateInterface
         return hitBox;
     }
 
+    public void updateHitBoxX(double xSpeed){
+        hitBox.x += xSpeed;
+        playerModuleManager.setPlayerX(hitBox.x);
+    }
+
+    public void updateHitBoxY(double ySpeed){
+        hitBox.y += ySpeed;
+        playerModuleManager.setPlayerY(hitBox.y);
+    }
+
 }

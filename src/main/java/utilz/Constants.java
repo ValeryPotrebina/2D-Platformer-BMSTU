@@ -13,6 +13,10 @@ public class Constants {
         public final static int GAME_WIDTH_DEFAULT = TILE_SIZE_DEFAULT * TILES_IN_WIDTH;
         public final static int GAME_HEIGHT_DEFAULT = TILE_SIZE_DEFAULT * TILES_IN_HEIGHT;
 
+        public final static int LEFT_BORDER = (int) (0.2 * GAME_WIDTH_DEFAULT);
+        public final static int RIGHT_BORDER = (int) (0.8 * GAME_WIDTH_DEFAULT);
+        public final static int TOP_BORDER = (int) (0.2 * GAME_HEIGHT_DEFAULT);
+        public final static int DOWN_BORDER = (int) (0.8 * GAME_HEIGHT_DEFAULT);
     }
 
     public static class GameConstants {
