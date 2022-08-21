@@ -45,6 +45,7 @@ public class PlayerManager implements PlayingUpdateInterface, PlayingDrawInterfa
     @Override
     public void draw(Graphics g, float scale, int lvlOffsetX, int lvlOffsetY) {
         player.draw(g, scale, lvlOffsetX, lvlOffsetY);
+
     }
 
     public void resetAll() {
